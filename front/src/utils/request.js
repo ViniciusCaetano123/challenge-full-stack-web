@@ -22,6 +22,11 @@ service.interceptors.request.use(
 service.interceptors.response.use( 
     response => {
         const res = response.data
+        if (res.message) {
+            toast.value.message = res.message
+            toast.value.color = 'success'
+            toast.value.show = true
+        }
         return res      
     },
     error => {      
