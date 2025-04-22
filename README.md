@@ -1,7 +1,7 @@
 # Projeto de Gerenciamento de Alunos - Grupo A
 
 ### Demonstração
-<video src="dashboard.mp4" controls width="600"></video>
+<video src="./dashboard.mp4" controls width="600"></video>
 
 ## Observação
 
