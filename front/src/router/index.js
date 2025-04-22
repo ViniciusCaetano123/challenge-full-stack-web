@@ -32,6 +32,17 @@ export const routes = [
         }
       },
       {
+        path: 'students/edit/:id', 
+        name: 'students-edit', 
+        component: () => import('../views/students/Edit.vue'),
+        meta: { 
+          hidden: true,
+          title: 'Editar Aluno',
+          icon: 'mdi-account-school',          
+          roles: ['admin'] 
+        }
+      },
+      {
         path: 'enrolments', 
         name: 'enrolments', 
         component: () => import('../views/enrolments/index.vue'),
