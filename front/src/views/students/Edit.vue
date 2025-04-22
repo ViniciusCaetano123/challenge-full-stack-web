@@ -1,12 +1,12 @@
-<!-- views/EditStudent.vue -->
 <template>
   <StudentForm
     title="Editar Aluno"
     submitText="Atualizar"
-    cancelText="Cancelar"
+    
     :loading="fetchUpdateStudent?.loading"
     :onSubmit="updateStudent"
-    :initialData="studentData"
+    :initialData="fetchStudent?.data"
+    :onCancel="resetForm"
     :disable="{ ra: true, cpf: true }"
   />
 </template>
@@ -15,15 +15,17 @@
 import { ref, onMounted } from "vue";
 import StudentForm from "./Form.vue";
 import { useFetch } from "@/composables/useFetch";
-
+import { useRoute } from "vue-router";
+const route = useRoute();
 const loading = ref(false);
 const studentForm = ref(null);
 const fetchUpdateStudent = ref(null);
 const fetchStudent = ref(null);
+
 const updateStudent = async (studentData) => {
-  loading.value = true;
-  fetchUpdateStudent.value = useFetch("/students", {
-    method: "POST",
+  console.log("studentData", studentData);
+  fetchUpdateStudent.value = useFetch(`students/${route.params.id}`, {
+    method: "PUT",
     data: studentData,
   });
   await fetchUpdateStudent.value?.fetch();
@@ -32,12 +34,15 @@ const updateStudent = async (studentData) => {
   }
 };
 const getStudent = async (id) => {
-  loading.value = true;
-  fetchStudent.value = useFetch("/students", {
+  fetchStudent.value = useFetch(`students/${id}`, {
     method: "GET",
   });
   await fetchStudent.value?.fetch();
 };
+onMounted(async () => {
+  const { id } = route.params;
+  await getStudent(id);
+});
 
 const resetForm = () => {
   studentForm.value?.reset();

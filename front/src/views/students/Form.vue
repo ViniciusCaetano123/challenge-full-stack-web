@@ -69,9 +69,8 @@
               placeholder="exemplo@email.com"
             ></v-text-field>
           </div>   
-          
-          <div class="d-flex gap-4">
-            <v-btn 
+          <div class="d-flex gap-4" >
+            <v-btn  v-if="route?.name != 'students-edit'"
               color="error" 
               variant="text"
               class="pa-1" 
@@ -97,7 +96,10 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 const props = defineProps({
   initialData: Object,
   title: String,
@@ -116,6 +118,13 @@ const formData = reactive({
   cpf: '',
   email: ''
 })
+
+watch(() => props.initialData, (newValue) => {
+  if (newValue) {
+    Object.assign(formData, newValue)
+  }
+}, { deep: true })
+
 onMounted(() => {
   Object.assign(formData, props.initialData)
 })
@@ -123,6 +132,7 @@ const handleSubmit = () => {
   props.onSubmit(formData)
 }
 const reset = () => {
+  
   Object.keys(formData).forEach(key => formData[key] = '')
   form.value?.reset()
 }

@@ -42,7 +42,7 @@
       >
         <template v-slot:item.actions="{ item }">
           <v-card-actions>
-            <v-icon
+            <v-icon @click="$router.push({ name: 'students-edit', params: { id: item.id } })"
               color="medium-emphasis"
               icon="mdi-pencil"
               size="small"

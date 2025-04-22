@@ -1,4 +1,3 @@
-<!-- views/CreateStudent.vue -->
 <template>
   <StudentForm
     title="Cadastro de Aluno"

@@ -12,6 +12,7 @@ import '@mdi/font/css/materialdesignicons.css'
 //https://colorlib.com/etc/404/colorlib-error-404-10/
 //https://colorlib.com/wp/template/colorlib-error-404-10/
 //https://medium.com/@gilmarcintra/tutorial-passo-a-passo-como-validar-um-formul%C3%A1rio-vue-js-com-vuetify-d4480d0f15cf
+
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
