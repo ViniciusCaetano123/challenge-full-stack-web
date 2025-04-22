@@ -71,7 +71,7 @@ const queryString = reactive({
   email: "",
 });
 const fetchStudents = ref(null);
-
+const fetchDeleteStudent = ref(null);
 const search = async () => {
   if (queryString.ra === null && queryString.email === null) {
     queryString.ra = "";
@@ -79,9 +79,15 @@ const search = async () => {
   }
   const url = new URLSearchParams(queryString).toString();
 
-  fetchStudents.value = useFetch(`students?${url}`, { method: "get" });
+  fetchStudents.value = useFetch(`students?${url}`, { method: "GET" });
   await fetchStudents.value.fetch();
 };
+
+const delete = async (id) => {
+  fetchDeleteStudent.value = useFetch(`students/${id}`, { method: "DELETE" });
+  await fetchDeleteStudent.value.fetch();
+};
+
 onMounted(async () => {
   search();
 });
