@@ -52,7 +52,6 @@
               variant="outlined" 
               color="primary"
               placeholder="000.000.000-00"
-              v-mask="'###.###.###-##'"
             ></v-text-field>
           </div>
           

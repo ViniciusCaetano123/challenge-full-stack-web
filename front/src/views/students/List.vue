@@ -39,7 +39,7 @@
         :headers="headers"
         :items="fetchStudents?.data?.itens"
         :loading="fetchStudents?.loading"
-        :items-length="fetchStudents?.data?.total"
+        :items-length="fetchStudents?.data?.total  || 0"
         :items-per-page="queryString.limite"
         :page="queryString?.pagina"
         @update:options="search"
