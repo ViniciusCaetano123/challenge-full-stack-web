@@ -1,5 +1,8 @@
 # Projeto de Gerenciamento de Alunos - Grupo A
 
+### Demonstração
+Assista à demonstração do projeto: [Vídeo de Demonstração no YouTube](https://www.youtube.com/watch?v=ID_DO_VIDEO)
+
 ## Observação
 
 > Não é necessário configurar variáveis de ambiente — elas já estão definidas no projeto.
