@@ -2,7 +2,7 @@
 
 ### Demonstração
 <video width="640" height="360" controls>
-  <source src="dashboard.gif"> 
+   <img src="dashboard.gif" alt="Demonstração" width="600"/>
 </video>
 
 ## Observação
