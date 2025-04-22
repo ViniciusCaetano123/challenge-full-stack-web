@@ -1,7 +1,7 @@
 # Projeto de Gerenciamento de Alunos - Grupo A
 
 ### Demonstração
-Assista à demonstração do projeto: [Vídeo de Demonstração no YouTube](https://www.youtube.com/watch?v=ID_DO_VIDEO)
+<video src="dashboard.mp4" controls width="600"></video>
 
 ## Observação
 
