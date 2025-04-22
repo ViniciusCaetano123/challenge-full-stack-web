@@ -47,7 +47,7 @@
               icon="mdi-pencil"
               size="small"
             ></v-icon>
-            <v-icon
+            <v-icon @click="select(item)"
               color="medium-emphasis"
               icon="mdi-delete"
               size="small"
@@ -56,13 +56,39 @@
         </template>
       </v-data-table>
     </v-sheet>
+    <v-dialog v-model="dialog"
+      max-width="400"
+      >
+    <v-card prepend-icon="mdi-delete" title="Tem certeza que deseja deletar?">
+    <v-container>
+      <p> <span class="font-weight-bold">RA:</span> {{ selectStudent?.ra }}</p>
+      <p> <span class="font-weight-bold">Nome:</span> {{ selectStudent?.nome }}</p>
+      <p> <span class="font-weight-bold">CPF:</span> {{ selectStudent?.cpf }}</p>
+      <p> <span class="font-weight-bold">E-mail:</span> {{ selectStudent?.email }}</p>
+    </v-container>
+        <template v-slot:actions>
+          <v-spacer></v-spacer>
+          <v-btn @click="dialog = false"  color="grey darken-1" text>
+            Cancelar
+          </v-btn>
+          <v-btn color="error" @click="deleteStudent(selectStudent.id)" :loading="fetchDeleteStudent?.loading">
+            Deletar
+          </v-btn>
+        </template>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, shallowRef ,onMounted } from "vue";
 import { useFetch } from "@/composables/useFetch";
 import { useRouter } from "vue-router";
+
+const dialog = ref(false);
+const selectStudent = ref(null);
+const fetchStudents = ref(null);
+const fetchDeleteStudent = ref(null);
 const router = useRouter();
 const queryString = reactive({
   pagina: 1,
@@ -70,11 +96,17 @@ const queryString = reactive({
   ra: "",
   email: "",
 });
-const fetchStudents = ref(null);
-const fetchDeleteStudent = ref(null);
+const select = (item)=>{
+  console.log("item", item);
+  dialog.value = true;
+  selectStudent.value = item;
+}
 const search = async () => {
-  if (queryString.ra === null && queryString.email === null) {
+  console.log("search", queryString);
+  if (queryString.ra === null) {
     queryString.ra = "";
+  }
+  if(queryString.email === null) {
     queryString.email = "";
   }
   const url = new URLSearchParams(queryString).toString();
@@ -83,9 +115,11 @@ const search = async () => {
   await fetchStudents.value.fetch();
 };
 
-const delete = async (id) => {
+const deleteStudent = async (id) => {
+ 
   fetchDeleteStudent.value = useFetch(`students/${id}`, { method: "DELETE" });
   await fetchDeleteStudent.value.fetch();
+  search()
 };
 
 onMounted(async () => {
