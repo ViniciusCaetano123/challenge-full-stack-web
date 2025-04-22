@@ -1,9 +1,9 @@
 # Projeto de Gerenciamento de Alunos - Grupo A
 
 ### Demonstração
-<video width="640" height="360" controls>
-   <img src="dashboard.gif" alt="Demonstração" width="600"/>
-</video>
+
+<img src="dashboard.gif" alt="Demonstração" width="600"/>
+
 
 ## Observação
 
