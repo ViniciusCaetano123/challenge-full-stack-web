@@ -126,5 +126,7 @@ const reset = () => {
   Object.keys(formData).forEach(key => formData[key] = '')
   form.value?.reset()
 }
-
+defineExpose({ 
+  reset
+})
 </script>

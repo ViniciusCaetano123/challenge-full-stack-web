@@ -21,7 +21,7 @@ export const authController = {
       }
 
       const token = generateToken(user);
-      console.log(token);
+      
       return reply.send({
         message: "Login realizado com sucesso",
         payload: { ...user, perfil: [user.perfil], token },

@@ -1,5 +1,5 @@
-create DATABASE grupo_a_db 
-use grupo_a_db 
+create DATABASE grupo_a_db;
+use grupo_a_db;
 CREATE TABLE usuarios (
     id CHAR(36) PRIMARY KEY DEFAULT (UUID()),
     nome VARCHAR(255)  NOT NULL,

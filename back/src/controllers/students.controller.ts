@@ -20,7 +20,7 @@ export default {
       await createStudent(student);
 
       return {
-        message: "Aluno criado com sucesso",
+        message: "Usuário criado com sucesso",
       };
     } catch (error) {
       request.log.error(error);
