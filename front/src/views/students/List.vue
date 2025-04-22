@@ -1,16 +1,5 @@
 <template>
   <div>
-    <div class="d-flex justify-space-between align-center mb-4">
-      <h1 class="text-h4">Consulta de alunos</h1>
-      <v-btn
-        color="primary"
-        prepend-icon="mdi-plus"
-        aria-label="Cadastrar Aluno"
-        @click="$router.push({ name: 'students-create' })"
-      >
-        Cadastrar Alunos
-      </v-btn>
-    </div>
     <v-card class="mb-6">
       <v-card-text>
         <v-row>
@@ -45,7 +34,6 @@
         </v-row>
       </v-card-text>
     </v-card>
-
     <v-sheet border rounded>
       <v-data-table
         :headers="headers"
@@ -90,10 +78,9 @@ const search = async () => {
     queryString.email = "";
   }
   const url = new URLSearchParams(queryString).toString();
-  
+
   fetchStudents.value = useFetch(`students?${url}`, { method: "get" });
   await fetchStudents.value.fetch();
-  
 };
 onMounted(async () => {
   search();
