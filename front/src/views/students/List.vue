@@ -35,10 +35,14 @@
       </v-card-text>
     </v-card>
     <v-sheet border rounded>
-      <v-data-table
+      <v-data-table-server
         :headers="headers"
         :items="fetchStudents?.data?.itens"
         :loading="fetchStudents?.loading"
+        :items-length="fetchStudents?.data?.total"
+        :items-per-page="queryString.limite"
+        :page="queryString?.pagina"
+        @update:options="search"
       >
         <template v-slot:item.actions="{ item }">
           <v-card-actions>
@@ -54,7 +58,7 @@
             ></v-icon>
           </v-card-actions>
         </template>
-      </v-data-table>
+      </v-data-table-server>
     </v-sheet>
     <v-dialog v-model="dialog"
       max-width="400"
@@ -100,8 +104,15 @@ const select = (item)=>{
   dialog.value = true;
   selectStudent.value = item;
 }
-const search = async () => {
-  console.log("search", queryString);
+const search = async (obj) => { 
+  if (obj) {
+    queryString.pagina = parseInt(obj?.page) || 1;
+    queryString.limite = parseInt(obj?.itemsPerPage) || 10;
+  } 
+  queryString.pagina = parseInt(obj?.page) || 1;
+  queryString.limite = parseInt(obj?.itemsPerPage) || 10;
+  
+  
   if (queryString.ra === null) {
     queryString.ra = "";
   }
@@ -118,7 +129,7 @@ const deleteStudent = async (id) => {
   fetchDeleteStudent.value = useFetch(`students/${id}`, { method: "DELETE" });
   await fetchDeleteStudent.value.fetch();
   dialog.value = false;
-  search()
+  await fetchStudents.value.fetch();
 };
 
 onMounted(async () => {

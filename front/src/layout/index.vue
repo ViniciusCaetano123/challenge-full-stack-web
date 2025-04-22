@@ -5,9 +5,11 @@
       <SideBar></SideBar>  
       <v-main class="h-full">
         <v-container fluid>
-          <transition name="slide-fade" mode="out-in">
-            <router-view></router-view>
-          </transition>
+          <router-view v-slot="{ Component }">
+            <transition name="slide-fade" mode="out-in">
+              <component :is="Component" />
+            </transition>
+          </router-view>
         </v-container>
       </v-main>
     </v-app>
