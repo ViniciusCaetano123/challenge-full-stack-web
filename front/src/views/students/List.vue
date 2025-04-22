@@ -97,7 +97,6 @@ const queryString = reactive({
   email: "",
 });
 const select = (item)=>{
-  console.log("item", item);
   dialog.value = true;
   selectStudent.value = item;
 }
@@ -116,9 +115,9 @@ const search = async () => {
 };
 
 const deleteStudent = async (id) => {
- 
   fetchDeleteStudent.value = useFetch(`students/${id}`, { method: "DELETE" });
   await fetchDeleteStudent.value.fetch();
+  dialog.value = false;
   search()
 };
 
