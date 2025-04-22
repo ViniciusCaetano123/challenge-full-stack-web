@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { createStudent, getStudents,getStudentById, updateStudent } from "../repositories/students.dao";
+import { createStudent, getStudents,getStudentById, updateStudent,deleteStudent } from "../repositories/students.dao";
 import {
   studentRequestSchema,
   studentQueryStrSchema,  
@@ -104,6 +104,27 @@ export default {
       
       return {
         message: "Aluno atualizado com sucesso",
+      };
+
+    } catch (error) {
+      request.log.error(error);
+      return reply.status(500).send({
+        message: "Erro interno do servidor",
+      });
+    }
+  },
+  async deleteById(
+    request: FastifyRequest<{ Params: z.infer<typeof studentParamsIdSchema> }>,
+    reply: FastifyReply
+  ) {
+    try {
+      const {id} = request.params;
+      
+
+      await deleteStudent(id);      
+      
+      return {
+        message: "Aluno deletado com sucesso",
       };
 
     } catch (error) {

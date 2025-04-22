@@ -49,6 +49,17 @@ const studentsRoutes: FastifyPluginAsyncZod = async function (fastify) {
         preHandler: [authMiddleware, authorizeRoles(['admin'])], 
         handler: studentController.updateById
     });
+    fastify.route({
+        method: 'DELETE',
+        url: '/:id',
+        schema: {
+            tags: ['Aluno'],
+            summary: 'Deletar aluno por ID',
+            params:studentParamsIdSchema           
+        },
+        preHandler: [authMiddleware, authorizeRoles(['admin'])], 
+        handler: studentController.deleteById
+    });
 };
 
 export default studentsRoutes;
